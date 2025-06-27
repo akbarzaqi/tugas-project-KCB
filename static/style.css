@@ -1,0 +1,77 @@
+* {
+  font-family: "Press Start 2P", cursive;
+}
+
+h1 {
+  text-align: center;
+}
+
+.main-window .card-frame {
+  background-color: rgb(38, 152, 209);
+  border: 5px solid black;
+  box-shadow: 10px 10px 0 black;
+}
+
+.count
+{
+    background-color: rgb(225, 216, 39);
+    border: 5px solid black;
+    box-shadow: 10px 10px 0 black;
+}
+
+.count-detec
+{
+    background-color: white;
+    border: 5px solid black;
+    box-shadow: 10px 10px 0 black;
+    margin-bottom: 20px;
+}
+
+
+
+
+.main-window .marker {
+  background-color: whitesmoke;
+  border: 5px solid black;
+  box-shadow: 10px 10px 0 black;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  border: 5px solid black;
+  box-shadow: 10px 10px 0 black;
+}
+
+.red 
+{
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    background-color: red;
+    color: white;
+}
+
+h3
+{
+    text-align: center;
+}
+
+.blue
+{
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    background-color: white;
+    color: black;
+}
+
+.green
+{
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    background-color: white;
+    color: black;
+}
+
+p{
+    text-align: center;
+}
