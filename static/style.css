@@ -2,6 +2,31 @@
   font-family: "Press Start 2P", cursive;
 }
 
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode #marker {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  color: white;
+  border: 5px solid white;
+  box-shadow: 10px 10px 0 white;
+}
+
+body.dark-mode .card-frame
+{
+  border: 5px solid white;
+  box-shadow: 10px 10px 0 white;
+}
+
+body.dark-mode .count
+{
+  border: 5px solid white;
+  box-shadow: 10px 10px 0 white;
+}
+
 h1 {
   text-align: center;
 }

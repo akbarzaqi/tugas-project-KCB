@@ -10,12 +10,13 @@ lower_red = np.array([0, 100, 100])
 upper_red = np.array([10, 255, 255])
 lower_blue = np.array([100, 150, 0])
 upper_blue = np.array([140, 255, 255])
-
+lower_green = np.array([35, 100, 100])
+upper_green = np.array([85, 255, 255])
 
 
 def generate_frames():
-    global isBlueDetected, isRedDetected
-    global countRed, countBlue
+    global isBlueDetected, isRedDetected, isGreenDetected
+    global countRed, countBlue, countGreen
     while True:
         success, img = cam.read()
         if not success:
@@ -23,16 +24,20 @@ def generate_frames():
         
         isBlueDetected = False
         isRedDetected = False
+        isGreenDetected = False
         countRed = 0
         countBlue = 0
+        countGreen = 0
 
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         
         maskRed = cv2.inRange(hsv, lower_red, upper_red)
         maskBlue = cv2.inRange(hsv, lower_blue, upper_blue)
+        maskGreen = cv2.inRange(hsv, lower_green, upper_green)
 
         redContours, _ = cv2.findContours(maskRed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         blueContours, _ = cv2.findContours(maskBlue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        greenContours, _ = cv2.findContours(maskGreen, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
        
         for contour in redContours:
             if cv2.contourArea(contour) > 1000:
@@ -42,6 +47,13 @@ def generate_frames():
                 isRedDetected = True
                 countRed += 1
 
+        for contour in greenContours:
+            if cv2.contourArea(contour) > 1000:
+                x, y, w, h = cv2.boundingRect(contour)
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                cv2.putText(img, "hijau", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 1)
+                isGreenDetected = True
+                countGreen += 1
       
         for contour in blueContours:
             if cv2.contourArea(contour) > 1000:
@@ -64,12 +76,14 @@ def index():
 
 @app.route('/status')
 def status():
-    print("cek status : merah : ", isRedDetected, "biru : ", isBlueDetected)
+    print("cek status : merah : ", isRedDetected, "biru : ", isBlueDetected, "green : ", isGreenDetected)
     return jsonify({
+        "countGreen" : countGreen,
         "countBlue" : countBlue,
         "countRed" : countRed,
         "red": isRedDetected,
-        "blue": isBlueDetected
+        "blue": isBlueDetected,
+        "green" : isGreenDetected
     })
 
 @app.route('/video_feed')
